@@ -18,6 +18,7 @@ const products = {
 
 let budget = INITIAL_BUDGET;
 let carbon = 0;
+let ecoRadarActive = false;
 const cart = [];
 
 const budgetValue = document.getElementById("budget-value");
@@ -28,6 +29,8 @@ const checkoutZone = document.getElementById("checkout-zone");
 const cartList = document.getElementById("cart-list");
 const report = document.getElementById("report");
 const finishBtn = document.getElementById("finish-btn");
+const ecoRadarBtn = document.getElementById("eco-radar-btn");
+const productGrid = document.getElementById("product-grid");
 
 const productCards = [...document.querySelectorAll(".product-card")];
 
@@ -42,6 +45,26 @@ function renderStatus() {
   carbonBar.style.width = `${carbonPct}%`;
 
   finishBtn.disabled = cart.length === 0;
+}
+
+function renderEcoRadar() {
+  ecoRadarBtn.textContent = `🟢 Eco Radar: ${ecoRadarActive ? "ON" : "OFF"}`;
+  ecoRadarBtn.classList.toggle("active", ecoRadarActive);
+}
+
+function toggleEcoRadar() {
+  ecoRadarActive = !ecoRadarActive;
+  renderEcoRadar();
+
+  if (ecoRadarActive) {
+    productGrid.classList.remove("eco-flash");
+    void productGrid.offsetWidth;
+    productGrid.classList.add("eco-flash");
+    return;
+  }
+
+  productGrid.classList.remove("eco-flash");
+  productCards.forEach((card) => card.classList.remove("revealed"));
 }
 
 function addToCart(productId) {
@@ -97,6 +120,13 @@ function evaluateResult() {
 }
 
 productCards.forEach((card) => {
+  card.addEventListener("click", () => {
+    if (!ecoRadarActive || card.classList.contains("dragging")) {
+      return;
+    }
+    card.classList.toggle("revealed");
+  });
+
   card.addEventListener("dragstart", (event) => {
     card.classList.add("dragging");
     event.dataTransfer.setData("text/plain", card.dataset.id);
@@ -123,6 +153,8 @@ checkoutZone.addEventListener("drop", (event) => {
   addToCart(productId);
 });
 
+ecoRadarBtn.addEventListener("click", toggleEcoRadar);
 finishBtn.addEventListener("click", evaluateResult);
 
 renderStatus();
+renderEcoRadar();

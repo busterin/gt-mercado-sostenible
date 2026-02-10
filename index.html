@@ -28,22 +28,30 @@
 
       <section class="board">
         <section class="products">
-          <h2>Zona de productos</h2>
+          <div class="products-head">
+            <h2>Zona de productos</h2>
+            <button id="eco-radar-btn" class="eco-radar" type="button">🟢 Eco Radar: OFF</button>
+          </div>
           <p>Arrastra los productos hacia la caja para comprarlos.</p>
+          <p class="radar-help">Con Eco Radar ON, haz clic en cada producto para ver su información completa.</p>
 
           <div class="product-grid" id="product-grid">
             <article class="product-card" draggable="true" data-id="yogur-pack-6">
               <div class="product-emoji" aria-hidden="true">🥛🥛</div>
               <h3>Pack de 6 yogures</h3>
-              <p class="price">3 €</p>
-              <p>Huella: Alta (6 plásticos + cartón)</p>
+              <div class="product-details">
+                <p class="price">3 €</p>
+                <p>Huella: Alta (6 plásticos + cartón)</p>
+              </div>
             </article>
 
             <article class="product-card" draggable="true" data-id="yogur-tarro-vidrio">
               <div class="product-emoji" aria-hidden="true">🫙</div>
               <h3>Yogur en tarro grande de vidrio</h3>
-              <p class="price">7 €</p>
-              <p>Huella: Muy baja (reciclable/reutilizable)</p>
+              <div class="product-details">
+                <p class="price">7 €</p>
+                <p>Huella: Muy baja (reciclable/reutilizable)</p>
+              </div>
             </article>
           </div>
         </section>
