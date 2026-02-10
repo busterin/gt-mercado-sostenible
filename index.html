@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GT Mercado Sostenible</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="game">
+      <header class="status-panel">
+        <div class="metric">
+          <div class="metric-top">
+            <span>💶 Presupuesto</span>
+            <strong id="budget-value">200 €</strong>
+          </div>
+          <div class="bar"><div id="budget-bar" class="fill budget-fill"></div></div>
+        </div>
+
+        <div class="metric">
+          <div class="metric-top">
+            <span>🌍 Huella de carbono</span>
+            <strong id="carbon-value">0 pts</strong>
+          </div>
+          <div class="bar"><div id="carbon-bar" class="fill carbon-fill"></div></div>
+        </div>
+      </header>
+
+      <section class="board">
+        <section class="products">
+          <h2>Zona de productos</h2>
+          <p>Arrastra los productos hacia la caja para comprarlos.</p>
+
+          <div class="product-grid" id="product-grid">
+            <article class="product-card" draggable="true" data-id="yogur-pack-6">
+              <div class="product-emoji" aria-hidden="true">🥛🥛</div>
+              <h3>Pack de 6 yogures</h3>
+              <p class="price">3 €</p>
+              <p>Huella: Alta (6 plásticos + cartón)</p>
+            </article>
+
+            <article class="product-card" draggable="true" data-id="yogur-tarro-vidrio">
+              <div class="product-emoji" aria-hidden="true">🫙</div>
+              <h3>Yogur en tarro grande de vidrio</h3>
+              <p class="price">7 €</p>
+              <p>Huella: Muy baja (reciclable/reutilizable)</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="checkout" id="checkout-zone">
+          <h2>🛒 Caja</h2>
+          <p>Suelta aquí tus productos.</p>
+          <ul id="cart-list"></ul>
+          <button id="finish-btn" type="button">Confirmar compra</button>
+        </section>
+      </section>
+
+      <section id="report" class="report hidden" aria-live="polite"></section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
