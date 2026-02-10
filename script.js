@@ -7,12 +7,42 @@ const products = {
     price: 3,
     carbonLabel: "Alta",
     carbonPoints: 6,
+    quality: "Media",
   },
   "yogur-tarro-vidrio": {
     name: "Yogur en tarro grande de vidrio",
     price: 7,
     carbonLabel: "Muy baja",
     carbonPoints: 1,
+    quality: "Alta",
+  },
+  "pack-boligrafos-plastico": {
+    name: "Pack de 10 bolígrafos de plástico",
+    price: 4,
+    carbonLabel: "Media",
+    carbonPoints: 4,
+    quality: "Baja",
+  },
+  "boligrafo-metal-recargable": {
+    name: "1 bolígrafo de metal recargable",
+    price: 6,
+    carbonLabel: "Baja",
+    carbonPoints: 2,
+    quality: "Alta",
+  },
+  "coche-fabrica-lejana": {
+    name: "Coche de plástico de La Gran Gran Fábrica Lejana",
+    price: 2,
+    carbonLabel: "Muy alta",
+    carbonPoints: 8,
+    quality: "Baja",
+  },
+  "tren-madera-local": {
+    name: "Tren de madera del carpintero del pueblo",
+    price: 9,
+    carbonLabel: "Mínima",
+    carbonPoints: 0,
+    quality: "Muy alta",
   },
 };
 
@@ -86,7 +116,7 @@ function addToCart(productId) {
   }
 
   const item = document.createElement("li");
-  item.textContent = `${product.name} - ${product.price} € | Huella ${product.carbonLabel} (+${product.carbonPoints})`;
+  item.textContent = `${product.name} - ${product.price} € | Huella ${product.carbonLabel} (+${product.carbonPoints}) | Calidad ${product.quality}`;
   cartList.appendChild(item);
 
   renderStatus();
