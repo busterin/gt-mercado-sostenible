@@ -157,17 +157,20 @@ body {
   font-size: 1.9rem;
 }
 
-.product-details {
-  display: none;
+.product-card.image-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
 }
 
-.product-card.revealed {
-  background: #f0fdf4;
-  border-color: #22c55e;
-}
-
-.product-card.revealed .product-details {
-  display: block;
+.product-image {
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+  object-fit: contain;
+  border-radius: 8px;
+  pointer-events: none;
 }
 
 .price {
@@ -224,6 +227,50 @@ body {
 
 .report.bad {
   border-color: var(--bad);
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  z-index: 20;
+}
+
+.modal-content {
+  width: min(480px, 100%);
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1rem 1.1rem;
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-right: 2rem;
+}
+
+.modal-content p {
+  margin: 0.5rem 0;
+}
+
+.modal-extra {
+  color: #374151;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  position: absolute;
+  right: 0.6rem;
+  top: 0.4rem;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #4b5563;
 }
 
 .hidden {

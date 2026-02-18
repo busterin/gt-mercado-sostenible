@@ -8,6 +8,7 @@ const products = {
     carbonLabel: "Alta",
     carbonPoints: 6,
     quality: "Media",
+    extraInfo: "6 envases de plástico y cartón generan residuos de corta vida.",
   },
   "yogur-tarro-vidrio": {
     name: "Yogur en tarro grande de vidrio",
@@ -15,6 +16,7 @@ const products = {
     carbonLabel: "Muy baja",
     carbonPoints: 1,
     quality: "Alta",
+    extraInfo: "El tarro de vidrio se puede reutilizar y reciclar con facilidad.",
   },
   "pack-boligrafos-plastico": {
     name: "Pack de 10 bolígrafos de plástico",
@@ -22,6 +24,7 @@ const products = {
     carbonLabel: "Media",
     carbonPoints: 4,
     quality: "Baja",
+    extraInfo: "Mucho plástico de un solo uso para una vida útil corta.",
   },
   "boligrafo-metal-recargable": {
     name: "1 bolígrafo de metal recargable",
@@ -29,6 +32,7 @@ const products = {
     carbonLabel: "Baja",
     carbonPoints: 2,
     quality: "Alta",
+    extraInfo: "Solo requiere recambio de tinta, reduciendo residuos.",
   },
   "coche-fabrica-lejana": {
     name: "Coche de plástico de La Gran Gran Fábrica Lejana",
@@ -36,6 +40,7 @@ const products = {
     carbonLabel: "Muy alta",
     carbonPoints: 8,
     quality: "Baja",
+    extraInfo: "Viaja más de 10.000 km en barco y camión antes de llegar a tienda.",
   },
   "tren-madera-local": {
     name: "Tren de madera del carpintero del pueblo",
@@ -43,6 +48,7 @@ const products = {
     carbonLabel: "Mínima",
     carbonPoints: 0,
     quality: "Muy alta",
+    extraInfo: "Fabricado con madera local y sin transporte de larga distancia.",
   },
 };
 
@@ -61,6 +67,14 @@ const report = document.getElementById("report");
 const finishBtn = document.getElementById("finish-btn");
 const ecoRadarBtn = document.getElementById("eco-radar-btn");
 const productGrid = document.getElementById("product-grid");
+
+const ecoModal = document.getElementById("eco-modal");
+const ecoModalClose = document.getElementById("eco-modal-close");
+const ecoModalTitle = document.getElementById("eco-modal-title");
+const ecoModalPrice = document.getElementById("eco-modal-price");
+const ecoModalCarbon = document.getElementById("eco-modal-carbon");
+const ecoModalQuality = document.getElementById("eco-modal-quality");
+const ecoModalExtra = document.getElementById("eco-modal-extra");
 
 const productCards = [...document.querySelectorAll(".product-card")];
 
@@ -82,6 +96,25 @@ function renderEcoRadar() {
   ecoRadarBtn.classList.toggle("active", ecoRadarActive);
 }
 
+function closeEcoModal() {
+  ecoModal.classList.add("hidden");
+}
+
+function openEcoModal(productId) {
+  const product = products[productId];
+  if (!product) {
+    return;
+  }
+
+  ecoModalTitle.textContent = product.name;
+  ecoModalPrice.textContent = `Precio: ${product.price} €`;
+  ecoModalCarbon.textContent = `Huella: ${product.carbonLabel} (+${product.carbonPoints})`;
+  ecoModalQuality.textContent = `Calidad: ${product.quality}`;
+  ecoModalExtra.textContent = product.extraInfo;
+
+  ecoModal.classList.remove("hidden");
+}
+
 function toggleEcoRadar() {
   ecoRadarActive = !ecoRadarActive;
   renderEcoRadar();
@@ -94,7 +127,7 @@ function toggleEcoRadar() {
   }
 
   productGrid.classList.remove("eco-flash");
-  productCards.forEach((card) => card.classList.remove("revealed"));
+  closeEcoModal();
 }
 
 function addToCart(productId) {
@@ -119,6 +152,7 @@ function addToCart(productId) {
   item.textContent = `${product.name} - ${product.price} € | Huella ${product.carbonLabel} (+${product.carbonPoints}) | Calidad ${product.quality}`;
   cartList.appendChild(item);
 
+  closeEcoModal();
   renderStatus();
 }
 
@@ -154,7 +188,8 @@ productCards.forEach((card) => {
     if (!ecoRadarActive || card.classList.contains("dragging")) {
       return;
     }
-    card.classList.toggle("revealed");
+
+    openEcoModal(card.dataset.id);
   });
 
   card.addEventListener("dragstart", (event) => {
@@ -181,6 +216,19 @@ checkoutZone.addEventListener("drop", (event) => {
   checkoutZone.classList.remove("over");
   const productId = event.dataTransfer.getData("text/plain");
   addToCart(productId);
+});
+
+ecoModalClose.addEventListener("click", closeEcoModal);
+ecoModal.addEventListener("click", (event) => {
+  if (event.target === ecoModal) {
+    closeEcoModal();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    closeEcoModal();
+  }
 });
 
 ecoRadarBtn.addEventListener("click", toggleEcoRadar);
