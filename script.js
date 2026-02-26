@@ -1,4 +1,4 @@
-const INITIAL_BUDGET = 200;
+const INITIAL_BUDGET = 50;
 const CARBON_MAX = 24;
 
 const products = {
