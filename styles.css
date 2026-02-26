@@ -55,10 +55,14 @@ body {
 
 .budget-metric {
   background-image: url("images/presupuesto.png");
+  background-size: auto 88%;
+  background-position: center center;
 }
 
 .carbon-metric {
   background-image: url("images/huellacarbono.png");
+  background-size: auto 116%;
+  background-position: center center;
 }
 
 .metric-top {
