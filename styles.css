@@ -39,6 +39,23 @@ body {
   border-radius: 12px;
   padding: 0.8rem;
   border: 1px solid var(--line);
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.budget-metric {
+  background-image: url("images/presupuesto.png");
+}
+
+.carbon-metric {
+  background-image: url("images/huellacarbono.png");
 }
 
 .metric-top {
@@ -50,9 +67,7 @@ body {
 }
 
 .metric-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
+  display: none;
 }
 
 .metric-icon {
@@ -61,13 +76,22 @@ body {
   object-fit: contain;
 }
 
+.metric-top strong {
+  margin-left: auto;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+  background: rgba(0, 0, 0, 0.28);
+  padding: 0.2rem 0.45rem;
+  border-radius: 8px;
+}
+
 .bar {
   margin-top: 0.5rem;
   height: 14px;
   border-radius: 999px;
   overflow: hidden;
-  background: rgba(229, 231, 235, 0.75);
-  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.45);
 }
 
 .fill {
@@ -77,12 +101,12 @@ body {
 }
 
 .budget-fill {
-  background: url("images/presupuesto.png") center / cover no-repeat;
+  background: linear-gradient(90deg, rgba(34, 197, 94, 0.95), rgba(132, 204, 22, 0.95));
   width: 100%;
 }
 
 .carbon-fill {
-  background: url("images/huellacarbono.png") center / cover no-repeat;
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.95), rgba(239, 68, 68, 0.95));
 }
 
 .board {
@@ -92,19 +116,19 @@ body {
   gap: 1rem;
 }
 
-.products,
+.products {
+  background: url("images/fondo_objetos.png") center / cover no-repeat;
+  border: none;
+  border-radius: 16px;
+  padding: 1rem;
+}
+
 .checkout,
 .report {
   background: rgba(255, 255, 255, 0.93);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 1rem;
-}
-
-.products {
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.86)),
-    url("images/fondo_objetos.png") center / cover no-repeat;
 }
 
 .products-head {
@@ -116,7 +140,7 @@ body {
 }
 
 .products-head h2 {
-  margin: 0;
+  display: none;
 }
 
 .eco-radar {
@@ -157,6 +181,13 @@ body {
 .radar-help {
   color: #4b5563;
   font-size: 0.95rem;
+}
+
+.products > p,
+.products .radar-help,
+.checkout > h2,
+.checkout > p {
+  display: none;
 }
 
 .product-grid {
@@ -239,21 +270,27 @@ body {
 }
 
 .checkout {
-  border-style: dashed;
+  border: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
-    url("images/caja.png") center / cover no-repeat;
+  background: url("images/caja.png") center / cover no-repeat;
+  border-radius: 16px;
+  padding-top: 6.2rem;
 }
 
 .checkout.over {
   transform: scale(1.01);
   box-shadow: 0 8px 22px rgba(3, 105, 161, 0.2);
+  outline: 2px dashed rgba(255, 255, 255, 0.95);
+  outline-offset: -8px;
 }
 
 #cart-list {
   min-height: 140px;
   padding-left: 1.2rem;
+  background: rgba(255, 255, 255, 0.78);
+  border-radius: 12px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 
 #finish-btn {
