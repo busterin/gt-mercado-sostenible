@@ -22,16 +22,18 @@ body {
 }
 
 .game {
-  max-width: 1050px;
+  max-width: 1260px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1.1rem 1.1rem 1.4rem;
   backdrop-filter: saturate(1.03);
+  min-height: 100vh;
 }
 
 .status-panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  align-items: stretch;
 }
 
 .metric {
@@ -39,13 +41,13 @@ body {
   border-radius: 12px;
   padding: 0.8rem;
   border: none;
-  min-height: 96px;
+  min-height: 118px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 0.45rem;
-  background-position: center;
-  background-size: cover;
+  background-position: center top;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
@@ -82,13 +84,14 @@ body {
   color: #fff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
   background: rgba(0, 0, 0, 0.28);
-  padding: 0.2rem 0.45rem;
+  padding: 0.28rem 0.55rem;
   border-radius: 8px;
+  font-size: 1.05rem;
 }
 
 .bar {
-  margin-top: 0.35rem;
-  height: 14px;
+  margin-top: 0.5rem;
+  height: 16px;
   border-radius: 999px;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.18);
@@ -115,6 +118,8 @@ body {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 1rem;
+  align-items: stretch;
+  min-height: calc(100vh - 210px);
 }
 
 .products {
@@ -124,7 +129,8 @@ body {
   background-repeat: no-repeat;
   border: none;
   border-radius: 16px;
-  padding: 1rem;
+  padding: 1rem 1rem 1.1rem;
+  min-height: 100%;
 }
 
 .checkout,
@@ -161,7 +167,7 @@ body {
 }
 
 .eco-radar-icon {
-  width: 138px;
+  width: 152px;
   height: auto;
   object-fit: contain;
   display: block;
@@ -202,8 +208,9 @@ body {
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.8rem;
-  margin-top: 0.8rem;
+  gap: 1rem;
+  margin-top: 0.9rem;
+  align-content: start;
 }
 
 .product-grid.eco-flash .product-card {
@@ -233,7 +240,7 @@ body {
 
 .product-thumb {
   width: 100%;
-  height: 128px;
+  height: 154px;
   object-fit: contain;
   display: block;
   margin-bottom: 0;
@@ -254,7 +261,7 @@ body {
 .product-image {
   width: 100%;
   height: auto;
-  max-height: 128px;
+  max-height: 154px;
   object-fit: contain;
   border-radius: 0;
   pointer-events: none;
@@ -275,10 +282,10 @@ body {
   background-size: auto 100%;
   background-repeat: no-repeat;
   border-radius: 16px;
-  padding-top: 6.2rem;
+  padding-top: 7.2rem;
   display: flex;
   flex-direction: column;
-  min-height: 420px;
+  min-height: 100%;
 }
 
 .checkout.over {
@@ -291,15 +298,15 @@ body {
 #cart-list {
   list-style: none;
   margin: 0;
-  min-height: 140px;
+  min-height: 220px;
   padding: 0.25rem;
   background: transparent;
   border-radius: 0;
   color: #111827;
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
-  gap: 0.35rem;
+  grid-template-columns: repeat(auto-fill, minmax(68px, 1fr));
+  gap: 0.45rem;
   align-content: start;
   overflow-y: auto;
   overflow-x: hidden;
@@ -308,13 +315,13 @@ body {
 .cart-item {
   display: grid;
   place-items: center;
-  min-height: 56px;
+  min-height: 68px;
 }
 
 .cart-item-thumb {
   width: 100%;
-  max-width: 56px;
-  max-height: 56px;
+  max-width: 68px;
+  max-height: 68px;
   object-fit: contain;
   display: block;
   pointer-events: none;
@@ -453,8 +460,14 @@ body {
 }
 
 @media (max-width: 860px) {
+  .status-panel {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
   .board {
     grid-template-columns: 1fr;
+    min-height: auto;
   }
 
   .product-grid {
