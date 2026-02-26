@@ -71,6 +71,12 @@ body {
   margin-left: 0.35rem;
 }
 
+.carbon-metric .metric-top,
+.carbon-metric .bar {
+  width: min(430px, 100%);
+  margin-left: 0.35rem;
+}
+
 .metric-top {
   display: flex;
   justify-content: space-between;
