@@ -83,6 +83,9 @@ const ecoModalPrice = document.getElementById("eco-modal-price");
 const ecoModalCarbon = document.getElementById("eco-modal-carbon");
 const ecoModalQuality = document.getElementById("eco-modal-quality");
 const ecoModalExtra = document.getElementById("eco-modal-extra");
+const zoomModal = document.getElementById("zoom-modal");
+const zoomModalClose = document.getElementById("zoom-modal-close");
+const zoomModalImage = document.getElementById("zoom-modal-image");
 
 const productCards = [...document.querySelectorAll(".product-card")];
 
@@ -108,6 +111,21 @@ function renderEcoRadar() {
 
 function closeEcoModal() {
   ecoModal.classList.add("hidden");
+}
+
+function closeZoomModal() {
+  zoomModal.classList.add("hidden");
+  zoomModalImage.src = "";
+  zoomModalImage.alt = "";
+}
+
+function openZoomModal(card) {
+  const cardImage = card.querySelector("img");
+  if (!cardImage) return;
+
+  zoomModalImage.src = cardImage.src;
+  zoomModalImage.alt = cardImage.alt || "";
+  zoomModal.classList.remove("hidden");
 }
 
 function openEcoModal(productId) {
@@ -206,7 +224,12 @@ function evaluateResult() {
 
 productCards.forEach((card) => {
   card.addEventListener("click", () => {
-    if (!ecoRadarActive || card.classList.contains("dragging")) {
+    if (card.classList.contains("dragging")) {
+      return;
+    }
+
+    if (!ecoRadarActive) {
+      openZoomModal(card);
       return;
     }
 
@@ -245,10 +268,17 @@ ecoModal.addEventListener("click", (event) => {
     closeEcoModal();
   }
 });
+zoomModalClose.addEventListener("click", closeZoomModal);
+zoomModal.addEventListener("click", (event) => {
+  if (event.target === zoomModal) {
+    closeZoomModal();
+  }
+});
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeEcoModal();
+    closeZoomModal();
   }
 });
 
