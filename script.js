@@ -4,6 +4,7 @@ const CARBON_MAX = 24;
 const products = {
   "yogur-pack-6": {
     name: "Pack de 6 yogures",
+    image: "images/yogures.png",
     price: 3,
     carbonLabel: "Alta",
     carbonPoints: 6,
@@ -12,6 +13,7 @@ const products = {
   },
   "yogur-tarro-vidrio": {
     name: "Yogur en tarro grande de vidrio",
+    image: "images/yogur_vidrio.png",
     price: 7,
     carbonLabel: "Muy baja",
     carbonPoints: 1,
@@ -20,6 +22,7 @@ const products = {
   },
   "pack-boligrafos-plastico": {
     name: "Pack de 10 bolígrafos de plástico",
+    image: "images/pack_bolis.png",
     price: 4,
     carbonLabel: "Media",
     carbonPoints: 4,
@@ -28,6 +31,7 @@ const products = {
   },
   "boligrafo-metal-recargable": {
     name: "1 bolígrafo de metal recargable",
+    image: "images/boli_metal.png",
     price: 6,
     carbonLabel: "Baja",
     carbonPoints: 2,
@@ -36,6 +40,7 @@ const products = {
   },
   "coche-fabrica-lejana": {
     name: "Coche de plástico de La Gran Gran Fábrica Lejana",
+    image: "images/coche.png",
     price: 2,
     carbonLabel: "Muy alta",
     carbonPoints: 8,
@@ -44,6 +49,7 @@ const products = {
   },
   "tren-madera-local": {
     name: "Tren de madera del carpintero del pueblo",
+    image: "images/tren.png",
     price: 9,
     carbonLabel: "Mínima",
     carbonPoints: 0,
@@ -96,6 +102,7 @@ function renderStatus() {
 function renderEcoRadar() {
   ecoRadarLabel.textContent = `Eco Radar: ${ecoRadarActive ? "ON" : "OFF"}`;
   ecoRadarIcon.src = ecoRadarActive ? "images/eco_on.png" : "images/eco_off.png";
+  ecoRadarBtn.setAttribute("aria-label", ecoRadarLabel.textContent);
   ecoRadarBtn.classList.toggle("active", ecoRadarActive);
 }
 
@@ -152,7 +159,18 @@ function addToCart(productId) {
   }
 
   const item = document.createElement("li");
-  item.textContent = `${product.name} - ${product.price} € | Huella ${product.carbonLabel} (+${product.carbonPoints}) | Calidad ${product.quality}`;
+  item.className = "cart-item";
+  item.title = product.name;
+  item.setAttribute("aria-label", product.name);
+
+  const itemImg = document.createElement("img");
+  itemImg.className = "cart-item-thumb";
+  itemImg.src = product.image;
+  itemImg.alt = "";
+  itemImg.draggable = false;
+  itemImg.setAttribute("aria-hidden", "true");
+
+  item.appendChild(itemImg);
   cartList.appendChild(item);
 
   closeEcoModal();
