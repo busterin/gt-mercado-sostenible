@@ -118,7 +118,10 @@ body {
 }
 
 .products {
-  background: url("images/fondo_objetos.png") center / contain no-repeat;
+  background-image: url("images/fondo_objetos.png");
+  background-position: center top;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
   border: none;
   border-radius: 16px;
   padding: 1rem;
@@ -267,7 +270,10 @@ body {
 .checkout {
   border: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  background: url("images/caja.png") center / contain no-repeat;
+  background-image: url("images/caja.png");
+  background-position: center top;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
   border-radius: 16px;
   padding-top: 6.2rem;
   display: flex;
@@ -332,7 +338,20 @@ body {
 }
 
 .report {
-  margin-top: 1rem;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100vw - 2rem));
+  max-height: min(80vh, 680px);
+  overflow: auto;
+  margin: 0;
+  z-index: 40;
+  background: rgba(255, 255, 255, 0.97);
+  border: 2px solid var(--line);
+  box-shadow:
+    0 16px 38px rgba(15, 23, 42, 0.28),
+    0 0 0 100vmax rgba(15, 23, 42, 0.35);
 }
 
 .report h2 {
