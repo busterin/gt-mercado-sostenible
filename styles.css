@@ -61,8 +61,8 @@ body {
 
 .carbon-metric {
   background-image: url("images/huellacarbono.png");
-  background-size: auto 100%;
-  background-position: center center;
+  background-size: contain;
+  background-position: right center;
 }
 
 .budget-metric .metric-top,
