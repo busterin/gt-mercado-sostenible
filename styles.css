@@ -67,13 +67,13 @@ body {
 
 .budget-metric .metric-top,
 .budget-metric .bar {
-  width: min(430px, 100%);
+  width: min(380px, 100%);
   margin-left: 0.35rem;
 }
 
 .carbon-metric .metric-top,
 .carbon-metric .bar {
-  width: min(430px, 100%);
+  width: min(380px, 100%);
   margin-left: 0.35rem;
 }
 
@@ -106,7 +106,7 @@ body {
 }
 
 .bar {
-  margin-top: 0.5rem;
+  margin-top: 0.8rem;
   height: 16px;
   border-radius: 999px;
   overflow: hidden;
