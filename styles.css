@@ -18,13 +18,14 @@ body {
   min-height: 100vh;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--ink);
-  background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
+  background: url("images/fondo.png") center / cover no-repeat fixed;
 }
 
 .game {
   max-width: 1050px;
   margin: 0 auto;
   padding: 1rem;
+  backdrop-filter: saturate(1.03);
 }
 
 .status-panel {
@@ -34,7 +35,7 @@ body {
 }
 
 .metric {
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.94);
   border-radius: 12px;
   padding: 0.8rem;
   border: 1px solid var(--line);
@@ -45,6 +46,19 @@ body {
   justify-content: space-between;
   gap: 1rem;
   font-weight: 700;
+  align-items: center;
+}
+
+.metric-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.metric-icon {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
 }
 
 .bar {
@@ -52,7 +66,8 @@ body {
   height: 14px;
   border-radius: 999px;
   overflow: hidden;
-  background: #e5e7eb;
+  background: rgba(229, 231, 235, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.35);
 }
 
 .fill {
@@ -62,12 +77,12 @@ body {
 }
 
 .budget-fill {
-  background: linear-gradient(90deg, #22c55e, #84cc16);
+  background: url("images/presupuesto.png") center / cover no-repeat;
   width: 100%;
 }
 
 .carbon-fill {
-  background: linear-gradient(90deg, #f59e0b, #ef4444);
+  background: url("images/huellacarbono.png") center / cover no-repeat;
 }
 
 .board {
@@ -80,10 +95,16 @@ body {
 .products,
 .checkout,
 .report {
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.93);
   border: 1px solid var(--line);
   border-radius: 16px;
   padding: 1rem;
+}
+
+.products {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.86)),
+    url("images/fondo_objetos.png") center / cover no-repeat;
 }
 
 .products-head {
@@ -100,12 +121,21 @@ body {
 
 .eco-radar {
   border: 1px solid #16a34a;
-  background: #f0fdf4;
+  background: rgba(240, 253, 244, 0.95);
   color: #166534;
   border-radius: 999px;
   padding: 0.45rem 0.85rem;
   font-weight: 700;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.eco-radar-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .eco-radar.active {
@@ -167,7 +197,7 @@ body {
   padding: 0.9rem;
   border: 1px solid transparent;
   border-radius: 12px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.68);
   cursor: grab;
 }
 
@@ -175,8 +205,13 @@ body {
   opacity: 0.45;
 }
 
-.product-emoji {
-  font-size: 1.9rem;
+.product-thumb {
+  width: 100%;
+  height: 96px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 0.4rem;
+  pointer-events: none;
 }
 
 .product-card.image-only {
@@ -206,6 +241,9 @@ body {
 .checkout {
   border-style: dashed;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+    url("images/caja.png") center / cover no-repeat;
 }
 
 .checkout.over {

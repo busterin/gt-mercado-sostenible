@@ -11,7 +11,10 @@
       <header class="status-panel">
         <div class="metric">
           <div class="metric-top">
-            <span>💶 Presupuesto</span>
+            <span class="metric-label">
+              <img class="metric-icon" src="images/presupuesto.png" alt="" aria-hidden="true" draggable="false" />
+              Presupuesto
+            </span>
             <strong id="budget-value">200 €</strong>
           </div>
           <div class="bar"><div id="budget-bar" class="fill budget-fill"></div></div>
@@ -19,7 +22,10 @@
 
         <div class="metric">
           <div class="metric-top">
-            <span>🌍 Huella de carbono</span>
+            <span class="metric-label">
+              <img class="metric-icon" src="images/huellacarbono.png" alt="" aria-hidden="true" draggable="false" />
+              Huella de carbono
+            </span>
             <strong id="carbon-value">0 pts</strong>
           </div>
           <div class="bar"><div id="carbon-bar" class="fill carbon-fill"></div></div>
@@ -30,32 +36,35 @@
         <section class="products">
           <div class="products-head">
             <h2>Zona de productos</h2>
-            <button id="eco-radar-btn" class="eco-radar" type="button">🟢 Eco Radar: OFF</button>
+            <button id="eco-radar-btn" class="eco-radar" type="button">
+              <img id="eco-radar-icon" class="eco-radar-icon" src="images/eco_off.png" alt="" aria-hidden="true" draggable="false" />
+              <span id="eco-radar-label">Eco Radar: OFF</span>
+            </button>
           </div>
           <p>Arrastra los productos hacia la caja para comprarlos.</p>
           <p class="radar-help">Con Eco Radar ON, haz clic en cada producto para ver su huella y calidad.</p>
 
           <div class="product-grid" id="product-grid">
             <article class="product-card" draggable="true" data-id="yogur-pack-6">
-              <div class="product-emoji" aria-hidden="true">🥛🥛</div>
+              <img class="product-thumb" src="images/yogures.png" alt="" aria-hidden="true" draggable="false" />
               <h3>Pack de 6 yogures</h3>
               <p class="price">3 €</p>
             </article>
 
             <article class="product-card" draggable="true" data-id="yogur-tarro-vidrio">
-              <div class="product-emoji" aria-hidden="true">🫙</div>
+              <img class="product-thumb" src="images/yogur_vidrio.png" alt="" aria-hidden="true" draggable="false" />
               <h3>Yogur en tarro grande de vidrio</h3>
               <p class="price">7 €</p>
             </article>
 
             <article class="product-card" draggable="true" data-id="pack-boligrafos-plastico">
-              <div class="product-emoji" aria-hidden="true">🖊️🖊️</div>
+              <img class="product-thumb" src="images/pack_bolis.png" alt="" aria-hidden="true" draggable="false" />
               <h3>Pack de 10 bolígrafos de plástico</h3>
               <p class="price">4 €</p>
             </article>
 
             <article class="product-card" draggable="true" data-id="boligrafo-metal-recargable">
-              <div class="product-emoji" aria-hidden="true">🖋️</div>
+              <img class="product-thumb" src="images/boli_metal.png" alt="" aria-hidden="true" draggable="false" />
               <h3>1 bolígrafo de metal recargable</h3>
               <p class="price">6 €</p>
             </article>
@@ -73,7 +82,7 @@
         </section>
 
         <section class="checkout" id="checkout-zone">
-          <h2>🛒 Caja</h2>
+          <h2>Caja</h2>
           <p>Suelta aquí tus productos.</p>
           <ul id="cart-list"></ul>
           <button id="finish-btn" type="button">Confirmar compra</button>

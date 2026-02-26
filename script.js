@@ -66,6 +66,8 @@ const cartList = document.getElementById("cart-list");
 const report = document.getElementById("report");
 const finishBtn = document.getElementById("finish-btn");
 const ecoRadarBtn = document.getElementById("eco-radar-btn");
+const ecoRadarIcon = document.getElementById("eco-radar-icon");
+const ecoRadarLabel = document.getElementById("eco-radar-label");
 const productGrid = document.getElementById("product-grid");
 
 const ecoModal = document.getElementById("eco-modal");
@@ -92,7 +94,8 @@ function renderStatus() {
 }
 
 function renderEcoRadar() {
-  ecoRadarBtn.textContent = `🟢 Eco Radar: ${ecoRadarActive ? "ON" : "OFF"}`;
+  ecoRadarLabel.textContent = `Eco Radar: ${ecoRadarActive ? "ON" : "OFF"}`;
+  ecoRadarIcon.src = ecoRadarActive ? "images/eco_on.png" : "images/eco_off.png";
   ecoRadarBtn.classList.toggle("active", ecoRadarActive);
 }
 
