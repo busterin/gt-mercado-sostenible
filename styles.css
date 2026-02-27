@@ -338,6 +338,7 @@ body {
   display: grid;
   place-items: center;
   min-height: 68px;
+  cursor: pointer;
 }
 
 .cart-item-thumb {

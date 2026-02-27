@@ -59,20 +59,20 @@ const products = {
   "libro-nuevo": {
     name: "Libro nuevo",
     image: "images/libro_nuevo.png",
-    price: 0,
-    carbonLabel: "Pendiente",
-    carbonPoints: 0,
-    quality: "Pendiente",
-    extraInfo: "Información no disponible todavía.",
+    price: 16,
+    carbonLabel: "Media",
+    carbonPoints: 6,
+    quality: "Alta (está impecable).",
+    extraInfo: "Está impecable.",
   },
   "libro-segunda": {
     name: "Libro de segunda mano",
     image: "images/libro_segunda.png",
-    price: 0,
-    carbonLabel: "Pendiente",
+    price: 5,
+    carbonLabel: "0 (estás dándole una vida extra a algo que ya existe).",
     carbonPoints: 0,
-    quality: "Pendiente",
-    extraInfo: "Información no disponible todavía.",
+    quality: "Media (puede tener alguna esquina doblada, ¡pero la historia es la misma!).",
+    extraInfo: "Estás dándole una vida extra a algo que ya existe.",
   },
   "cepillo-plastico": {
     name: "Cepillo de plástico",
@@ -142,6 +142,13 @@ const zoomModalClose = document.getElementById("zoom-modal-close");
 const zoomModalImage = document.getElementById("zoom-modal-image");
 
 const productCards = [...document.querySelectorAll(".product-card")];
+const productCardById = new Map(productCards.map((card) => [card.dataset.id, card]));
+const productCardSlots = new Map(
+  productCards.map((card) => [
+    card.dataset.id,
+    { parent: card.parentElement, index: [...card.parentElement.children].indexOf(card) },
+  ]),
+);
 
 function renderStatus() {
   budgetValue.textContent = `${budget} €`;
@@ -188,9 +195,12 @@ function openEcoModal(productId) {
     return;
   }
 
+  const carbonText =
+    product.carbonPoints > 0 ? `${product.carbonLabel} (+${product.carbonPoints})` : product.carbonLabel;
+
   ecoModalTitle.textContent = product.name;
   ecoModalPrice.textContent = `Precio: ${product.price} €`;
-  ecoModalCarbon.textContent = `Huella: ${product.carbonLabel} (+${product.carbonPoints})`;
+  ecoModalCarbon.textContent = `Huella: ${carbonText}`;
   ecoModalQuality.textContent = `Calidad: ${product.quality}`;
   ecoModalExtra.textContent = product.extraInfo;
 
@@ -223,15 +233,16 @@ function addToCart(productId) {
 
   budget -= product.price;
   carbon += product.carbonPoints;
-  cart.push(product);
+  cart.push(productId);
 
-  const card = document.querySelector(`[data-id="${productId}"]`);
+  const card = productCardById.get(productId);
   if (card) {
     card.remove();
   }
 
   const item = document.createElement("li");
   item.className = "cart-item";
+  item.dataset.id = productId;
   item.title = product.name;
   item.setAttribute("aria-label", product.name);
 
@@ -243,8 +254,36 @@ function addToCart(productId) {
   itemImg.setAttribute("aria-hidden", "true");
 
   item.appendChild(itemImg);
+  item.addEventListener("click", () => {
+    restoreFromCart(productId, item);
+  });
   cartList.appendChild(item);
 
+  closeEcoModal();
+  renderStatus();
+}
+
+function restoreFromCart(productId, item) {
+  const product = products[productId];
+  const slot = productCardSlots.get(productId);
+  const card = productCardById.get(productId);
+  if (!product || !slot || !card) return;
+
+  const cartIndex = cart.indexOf(productId);
+  if (cartIndex === -1) return;
+
+  cart.splice(cartIndex, 1);
+  budget = Math.min(INITIAL_BUDGET, budget + product.price);
+  carbon = Math.max(0, carbon - product.carbonPoints);
+
+  const siblings = [...slot.parent.children];
+  if (slot.index >= siblings.length) {
+    slot.parent.appendChild(card);
+  } else {
+    slot.parent.insertBefore(card, siblings[slot.index]);
+  }
+
+  item.remove();
   closeEcoModal();
   renderStatus();
 }
