@@ -56,7 +56,7 @@ body {
 .budget-metric {
   background-image: url("images/presupuesto.png");
   background-size: auto 88%;
-  background-position: left center;
+  background-position: center center;
 }
 
 .carbon-metric {
@@ -68,7 +68,7 @@ body {
 .budget-metric .metric-top,
 .budget-metric .bar {
   width: min(380px, 100%);
-  margin-left: 0.35rem;
+  margin-inline: auto;
 }
 
 .carbon-metric .metric-top,
@@ -193,7 +193,11 @@ body {
   background: transparent;
   color: inherit;
   box-shadow: none;
-  animation: none;
+  animation: ecoRadarFlash 0.75s ease-out;
+}
+
+.eco-radar.active .eco-radar-icon {
+  animation: ecoRadarIconFlash 0.75s ease-out;
 }
 
 #eco-radar-label {
@@ -232,6 +236,7 @@ body {
 .product-grid.eco-flash .product-card {
   border-color: rgba(34, 197, 94, 0.85);
   box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.28);
+  animation: productEdgeFlash 0.75s ease-out;
 }
 
 .product-shelf {
@@ -293,9 +298,10 @@ body {
 .checkout {
   border: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: transparent;
   background-image: url("images/caja.png");
   background-position: center top;
-  background-size: auto 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   border-radius: 16px;
   padding-top: 7.2rem;
@@ -457,6 +463,47 @@ body {
 
 .modal-extra {
   color: #374151;
+}
+
+@keyframes productEdgeFlash {
+  0% {
+    border-color: rgba(34, 197, 94, 0);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+  50% {
+    border-color: rgba(74, 222, 128, 1);
+    box-shadow:
+      0 0 0 3px rgba(34, 197, 94, 0.45),
+      0 0 20px rgba(74, 222, 128, 0.55);
+  }
+  100% {
+    border-color: rgba(34, 197, 94, 0.85);
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.28);
+  }
+}
+
+@keyframes ecoRadarFlash {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(34, 197, 94, 0));
+  }
+  60% {
+    filter: drop-shadow(0 0 12px rgba(74, 222, 128, 0.95));
+  }
+  100% {
+    filter: drop-shadow(0 0 6px rgba(34, 197, 94, 0.6));
+  }
+}
+
+@keyframes ecoRadarIconFlash {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.03);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .modal-close {
