@@ -1,5 +1,13 @@
-const INITIAL_BUDGET = 50;
+const INITIAL_BUDGET = 35;
 const CARBON_MAX = 24;
+
+function roundCurrency(value) {
+  return Math.round(value * 100) / 100;
+}
+
+function formatEuros(value) {
+  return `${new Intl.NumberFormat("es-ES", { minimumFractionDigits: 0, maximumFractionDigits: 2 }).format(value)} €`;
+}
 
 const products = {
   "yogur-pack-6": {
@@ -15,7 +23,7 @@ const products = {
     name: "Yogur en tarro grande de vidrio",
     image: "images/yogur_vidrio.png",
     price: 7,
-    carbonLabel: "Muy baja",
+    carbonLabel: "Muy Baja",
     carbonPoints: 1,
     quality: "Alta",
     extraInfo: "El tarro de vidrio se puede reutilizar y reciclar con facilidad.",
@@ -77,38 +85,38 @@ const products = {
   "cepillo-plastico": {
     name: "Cepillo de plástico",
     image: "images/cepillo_plastico.png",
-    price: 0,
-    carbonLabel: "Pendiente",
-    carbonPoints: 0,
-    quality: "Pendiente",
-    extraInfo: "Información no disponible todavía.",
+    price: 1.5,
+    carbonLabel: "Alta",
+    carbonPoints: 8,
+    quality: "Media",
+    extraInfo: "No se puede reciclar, acaba en el mar.",
   },
   "cepillo-bambu": {
-    name: "Cepillo de bambú",
+    name: "Cepillo de bambú compostable",
     image: "images/cepillo_bambu.png",
-    price: 0,
-    carbonLabel: "Pendiente",
-    carbonPoints: 0,
-    quality: "Pendiente",
-    extraInfo: "Información no disponible todavía.",
+    price: 3.8,
+    carbonLabel: "Muy Baja",
+    carbonPoints: 1,
+    quality: "Alta",
+    extraInfo: "Cuando se gasta, lo puedes enterrar en el jardín y desaparece.",
   },
   "botella-plastico": {
-    name: "Botella de plástico",
+    name: "Botella de agua de plástico",
     image: "images/botella_plastico.png",
-    price: 0,
-    carbonLabel: "Pendiente",
-    carbonPoints: 0,
-    quality: "Pendiente",
-    extraInfo: "Información no disponible todavía.",
+    price: 0.6,
+    carbonLabel: "Alta",
+    carbonPoints: 8,
+    quality: "Baja",
+    extraInfo: "Genera residuos plásticos que tardan 500 años en degradarse.",
   },
   botella: {
-    name: "Botella reutilizable",
+    name: "Botella de acero inoxidable",
     image: "images/botella.png",
-    price: 0,
-    carbonLabel: "Pendiente",
-    carbonPoints: 0,
-    quality: "Pendiente",
-    extraInfo: "Información no disponible todavía.",
+    price: 18,
+    carbonLabel: "Muy baja",
+    carbonPoints: 1,
+    quality: "Alta (mantiene el agua fría y es muy resistente).",
+    extraInfo: "La usas durante años y rellenas del grifo.",
   },
 };
 
@@ -140,6 +148,7 @@ const ecoModalExtra = document.getElementById("eco-modal-extra");
 const zoomModal = document.getElementById("zoom-modal");
 const zoomModalClose = document.getElementById("zoom-modal-close");
 const zoomModalImage = document.getElementById("zoom-modal-image");
+const budgetToast = document.getElementById("budget-toast");
 
 const productCards = [...document.querySelectorAll(".product-card")];
 const productCardById = new Map(productCards.map((card) => [card.dataset.id, card]));
@@ -149,9 +158,26 @@ const productCardSlots = new Map(
     { parent: card.parentElement, index: [...card.parentElement.children].indexOf(card) },
   ]),
 );
+let budgetToastTimer = null;
+
+function showBudgetToast(message) {
+  if (!budgetToast) return;
+  budgetToast.textContent = message;
+  budgetToast.classList.remove("hidden");
+  budgetToast.classList.add("show");
+
+  if (budgetToastTimer) {
+    clearTimeout(budgetToastTimer);
+  }
+
+  budgetToastTimer = setTimeout(() => {
+    budgetToast.classList.remove("show");
+    budgetToast.classList.add("hidden");
+  }, 1900);
+}
 
 function renderStatus() {
-  budgetValue.textContent = `${budget} €`;
+  budgetValue.textContent = formatEuros(budget);
   carbonValue.textContent = `${carbon} pts`;
 
   const budgetPct = Math.max((budget / INITIAL_BUDGET) * 100, 0);
@@ -199,7 +225,7 @@ function openEcoModal(productId) {
     product.carbonPoints > 0 ? `${product.carbonLabel} (+${product.carbonPoints})` : product.carbonLabel;
 
   ecoModalTitle.textContent = product.name;
-  ecoModalPrice.textContent = `Precio: ${product.price} €`;
+  ecoModalPrice.textContent = `Precio: ${formatEuros(product.price)}`;
   ecoModalCarbon.textContent = `Huella: ${carbonText}`;
   ecoModalQuality.textContent = `Calidad: ${product.quality}`;
   ecoModalExtra.textContent = product.extraInfo;
@@ -226,12 +252,12 @@ function addToCart(productId) {
   const product = products[productId];
   if (!product) return;
 
-  if (budget < product.price) {
-    alert("No tienes presupuesto suficiente para este producto.");
+  if (budget + 0.001 < product.price) {
+    showBudgetToast("No tienes presupuesto suficiente para este producto.");
     return;
   }
 
-  budget -= product.price;
+  budget = roundCurrency(budget - product.price);
   carbon += product.carbonPoints;
   cart.push(productId);
 
@@ -273,7 +299,7 @@ function restoreFromCart(productId, item) {
   if (cartIndex === -1) return;
 
   cart.splice(cartIndex, 1);
-  budget = Math.min(INITIAL_BUDGET, budget + product.price);
+  budget = roundCurrency(Math.min(INITIAL_BUDGET, budget + product.price));
   carbon = Math.max(0, carbon - product.carbonPoints);
 
   const siblings = [...slot.parent.children];
@@ -289,7 +315,7 @@ function restoreFromCart(productId, item) {
 }
 
 function evaluateResult() {
-  const spent = INITIAL_BUDGET - budget;
+  const spent = roundCurrency(INITIAL_BUDGET - budget);
   let level = "good";
   let title = "Compra sostenible excelente";
   let feedback = "Has priorizado opciones de baja huella con un buen control del presupuesto.";
@@ -307,8 +333,8 @@ function evaluateResult() {
   report.className = `report ${level}`;
   report.innerHTML = `
     <h2>Informe final</h2>
-    <p><strong>Dinero gastado:</strong> ${spent} €</p>
-    <p><strong>Presupuesto restante:</strong> ${budget} €</p>
+    <p><strong>Dinero gastado:</strong> ${formatEuros(spent)}</p>
+    <p><strong>Presupuesto restante:</strong> ${formatEuros(budget)}</p>
     <p><strong>Huella total:</strong> ${carbon} puntos</p>
     <p><strong>Resultado:</strong> ${title}</p>
     <p>${feedback}</p>
