@@ -558,6 +558,60 @@ body {
   opacity: 1;
 }
 
+body.embed-mode {
+  background-attachment: scroll;
+}
+
+body.embed-mode .game {
+  max-width: 100%;
+  min-height: auto;
+  padding: 0.55rem;
+}
+
+body.embed-mode .status-panel {
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+}
+
+body.embed-mode .metric {
+  min-height: 96px;
+  padding: 0.55rem;
+}
+
+body.embed-mode .board {
+  grid-template-columns: 1fr;
+  min-height: auto;
+  gap: 0.7rem;
+}
+
+body.embed-mode .products {
+  padding: 0.7rem;
+}
+
+body.embed-mode .product-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.5rem;
+}
+
+body.embed-mode .checkout {
+  min-height: 360px;
+  padding-top: 5.9rem;
+}
+
+body.embed-mode #cart-list {
+  min-height: 150px;
+}
+
+body.embed-mode .report {
+  width: min(92vw, 540px);
+  max-height: 78vh;
+}
+
+body.embed-mode .budget-toast {
+  width: min(92vw, 540px);
+}
+
 @media (max-width: 860px) {
   .status-panel {
     grid-template-columns: 1fr;

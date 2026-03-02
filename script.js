@@ -159,6 +159,11 @@ const productCardSlots = new Map(
   ]),
 );
 let budgetToastTimer = null;
+const embedMode = new URLSearchParams(window.location.search).get("embed") === "1";
+
+if (embedMode) {
+  document.body.classList.add("embed-mode");
+}
 
 function showBudgetToast(message) {
   if (!budgetToast) return;
