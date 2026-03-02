@@ -110,7 +110,7 @@ body {
 }
 
 #carbon-value {
-  transform: translateY(8px);
+  transform: translateY(13px);
   margin-right: 0.55rem;
 }
 
@@ -538,8 +538,8 @@ body {
 .budget-toast {
   position: fixed;
   left: 50%;
-  bottom: 1.1rem;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: min(560px, calc(100vw - 2rem));
   background: rgba(17, 24, 39, 0.94);
   color: #f9fafb;

@@ -22,7 +22,7 @@ const products = {
   "yogur-tarro-vidrio": {
     name: "Yogur en tarro grande de vidrio",
     image: "images/yogur_vidrio.png",
-    price: 7,
+    price: 3.5,
     carbonLabel: "Muy Baja",
     carbonPoints: 1,
     quality: "Alta",
@@ -47,7 +47,7 @@ const products = {
     extraInfo: "Solo requiere recambio de tinta, reduciendo residuos.",
   },
   "coche-fabrica-lejana": {
-    name: "Coche de plástico de La Gran Gran Fábrica Lejana",
+    name: "Coche de plástico",
     image: "images/coche.png",
     price: 2,
     carbonLabel: "Muy alta",
