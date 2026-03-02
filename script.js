@@ -320,11 +320,11 @@ function evaluateResult() {
   let title = "Compra sostenible excelente";
   let feedback = "Has priorizado opciones de baja huella con un buen control del presupuesto.";
 
-  if (carbon >= 9 || spent > 70) {
+  if (carbon >= 18) {
     level = "bad";
     title = "Compra mejorable";
-    feedback = "Tu huella o tu gasto han sido altos. Prueba más productos reutilizables y locales.";
-  } else if (carbon >= 5 || spent > 30) {
+    feedback = "Tu huella ha sido alta. Prueba más productos reutilizables y locales.";
+  } else if (carbon >= 10) {
     level = "medium";
     title = "Compra aceptable";
     feedback = "Vas bien, pero todavía puedes reducir más el impacto ambiental.";
