@@ -160,9 +160,23 @@ const productCardSlots = new Map(
 );
 let budgetToastTimer = null;
 const embedMode = new URLSearchParams(window.location.search).get("embed") === "1";
+const EMBED_BASE_WIDTH = 1260;
+const EMBED_BASE_HEIGHT = 900;
+
+function updateEmbedScale() {
+  if (!embedMode) return;
+  const widthScale = window.innerWidth / EMBED_BASE_WIDTH;
+  const heightScale = window.innerHeight / EMBED_BASE_HEIGHT;
+  const scale = Math.min(widthScale, heightScale, 1);
+  document.documentElement.style.setProperty("--embed-scale", `${scale}`);
+}
 
 if (embedMode) {
   document.body.classList.add("embed-mode");
+  updateEmbedScale();
+  window.addEventListener("resize", updateEmbedScale);
+  window.addEventListener("orientationchange", updateEmbedScale);
+  requestAnimationFrame(updateEmbedScale);
 }
 
 function showBudgetToast(message) {

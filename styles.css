@@ -560,12 +560,20 @@ body {
 
 body.embed-mode {
   background-attachment: scroll;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 body.embed-mode .game {
-  max-width: 100%;
+  width: 1260px;
+  max-width: none;
   min-height: auto;
   padding: 0.55rem;
+  margin: 0;
+  transform: scale(var(--embed-scale, 1));
+  transform-origin: top center;
 }
 
 body.embed-mode .status-panel {
